@@ -1,0 +1,65 @@
+<div class="container">
+
+    <div class= "row">
+        <div class= "col-xl-12 header">
+                <h1> ITS BURGER TIME! </h1>
+                <img src="/public/img/burger.png">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 newBurger">
+            <form class="newBurgerForm">
+                <textarea id="order" type="text"></textarea>
+                <br>
+                <button id="burgerGen" type="submit">ORDER</button>
+                <p>Place an order for your burger of choice...</p>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6 nBurger">
+            {{#each nBurger}}
+                <p>
+                    {{this.id}}: {{this.burger_name}}
+                    <button eatID="{{this.id}}" class="eat"> EAT </button>
+                </p>
+            {{/each}}
+        </div>
+
+        <div class=col-xl-6 eaten>
+            {{#each eaten}}
+                <p><span class="label">Burger:</span> {{this.burger_name}}</p>
+            {{/each}}
+        </div>
+    </div>
+
+</div>
+
+<scipt type="text/javascript">
+    $('#burgerGen').on("click", function(event){
+        event.preventDefault();
+        var nBurger = {
+            burger: $("#order").val.trim()
+        };
+        $.post("/burger/create", newBurger, function() {
+            location.reload();
+        });
+    });
+
+    $(".eat").on("click", function(event){
+        var id = (this).data("eatID");
+
+        $.ajax("/burger/eat/:id" !!! + id, {
+            type: "PUT"
+        }).then(
+            function(){
+                console.log("You ate", id);
+                location.reload();
+            }
+        );
+    });
+
+
+</script>
