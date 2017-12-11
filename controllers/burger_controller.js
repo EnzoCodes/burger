@@ -23,16 +23,16 @@ router.get("/", function(req, res){
 });
 
 // Create burger
-router.post("/burger/create", function(req, res) {
-    burger.insertOne(req.body.burger_name, function(){
+router.post("/create", function(req, res) {
+    burger.insertOne(req.body.burger, function(){
         res.redirect("/index");
     });
 });
 
 //Move / Devour burger
-router.put("/burger/eat/:id", function(req, res) {
+router.put("/eat/:id", function(req, res) {
     burger.updateOne(req.params.id, function(){
-        res.redirect("/index");
+        res.redirect("/");
     });
 });
 

@@ -2,8 +2,8 @@
 
     <div class= "row">
         <div class= "col-xl-12 header">
-                <h1> ITS BURGER TIME! </h1>
-                <img src="/public/img/burger.png">
+                <h1> IT'S-A-BURGER TIME! </h1>
+                <img src="/assets/img/burger.png">
         </div>
     </div>
 
@@ -38,12 +38,14 @@
 </div>
 
 <script type="text/javascript">
+
     $('#burgerGen').on("click", function(event){
         event.preventDefault();
         var newBurger = {
-            burger: $("#order").val.trim()
-        };
-        $.post("/burger/create", newBurger, function() {
+            burger: $("#order").val.trim();
+        }
+        console.log(burger);
+        $.post("/create", newBurger, function() {
             location.reload();
         });
     });
@@ -51,14 +53,13 @@
     $(".eat").on("click", function(event){
         var id = (this).data("eatID");
 
-        $.ajax("/burger/eat/:id" + id, {
+        $.ajax("eat/:id" + id, {
             type: "PUT"
         }).then(
             function(){
                 console.log("You ate", id);
                 location.reload();
-            }
-        );
+            });
     });
 
 </script>
