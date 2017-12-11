@@ -25,14 +25,14 @@ router.get("/", function(req, res){
 // Create burger
 router.post("/create", function(req, res) {
     burger.insertOne(req.body.burger, function(){
-        res.redirect("/");
+        res.end();
     });
 });
 
 //Move / Devour burger
 router.put("/eat/:id", function(req, res) {
     burger.updateOne(req.params.id, function(){
-        res.redirect("/");
+        res.end();
     });
 });
 
