@@ -23,7 +23,7 @@
             {{#each newBurger}}
                 <p>
                     {{this.id}}: {{this.burger_name}}
-                    <button eatID="{{this.id}}" class="eat"> EAT </button>
+                    <button data-eatID="{{this.id}}" class="eat"> EAT </button>
                 </p>
             {{/each}}
         </div>
@@ -42,9 +42,8 @@
     $('#burgerGen').on("click", function(event){
         event.preventDefault();
         var newBurger = {
-            burger: $("#order").val.trim();
-        }
-        console.log(burger);
+            burger: $("#order").val().trim()
+        };
         $.post("/create", newBurger, function() {
             location.reload();
         });
@@ -53,7 +52,7 @@
     $(".eat").on("click", function(event){
         var id = (this).data("eatID");
 
-        $.ajax("eat/:id" + id, {
+        $.ajax("/eat/:id" + id, {
             type: "PUT"
         }).then(
             function(){

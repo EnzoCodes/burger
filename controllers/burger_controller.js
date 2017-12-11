@@ -25,7 +25,7 @@ router.get("/", function(req, res){
 // Create burger
 router.post("/create", function(req, res) {
     burger.insertOne(req.body.burger, function(){
-        res.redirect("/index");
+        res.redirect("/");
     });
 });
 
