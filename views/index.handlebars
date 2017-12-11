@@ -20,7 +20,7 @@
 
     <div class="row">
         <div class="col-xl-6 nBurger">
-            {{#each nBurger}}
+            {{#each newBurger}}
                 <p>
                     {{this.id}}: {{this.burger_name}}
                     <button eatID="{{this.id}}" class="eat"> EAT </button>
@@ -29,7 +29,7 @@
         </div>
 
         <div class=col-xl-6 eaten>
-            {{#each eaten}}
+            {{#each devoured}}
                 <p><span class="label">Burger:</span> {{this.burger_name}}</p>
             {{/each}}
         </div>
@@ -37,10 +37,10 @@
 
 </div>
 
-<scipt type="text/javascript">
+<script type="text/javascript">
     $('#burgerGen').on("click", function(event){
         event.preventDefault();
-        var nBurger = {
+        var newBurger = {
             burger: $("#order").val.trim()
         };
         $.post("/burger/create", newBurger, function() {
@@ -51,7 +51,7 @@
     $(".eat").on("click", function(event){
         var id = (this).data("eatID");
 
-        $.ajax("/burger/eat/:id" !!! + id, {
+        $.ajax("/burger/eat/:id" + id, {
             type: "PUT"
         }).then(
             function(){
@@ -60,6 +60,5 @@
             }
         );
     });
-
 
 </script>

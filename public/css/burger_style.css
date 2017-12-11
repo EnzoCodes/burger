@@ -1,0 +1,17 @@
+.header, .newBurger, .nBurger, .eaten {
+    text-align: center;
+}
+
+.nBurger, .eaten {
+    float: left;
+    width: 50%;
+}
+
+img {
+    width: 400px;
+    height: 400px;
+}
+
+body {
+    background: dodgerblue;
+}

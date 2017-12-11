@@ -1,19 +1,5 @@
-var connection = require("/connection");
+var connection = require("./connection");
 
-connection.connect(function(err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
-
-  console.log("connected as id " + connection.threadId);
-});
-
-// In the orm.js file, create the methods that will execute the necessary MySQL
-// commands in the controllers. These are the methods you will need to use in order
-//  to retrieve and store data in your database.
-//
-// selectAll()
 var orm = {
     selectAll: function(table, callback) {
         var sqlSelAll = "SELECT * FROM ??";
@@ -25,12 +11,12 @@ var orm = {
             });
         },
     // insertOne()
-    insertOne: function(table, col, nBurger, callback) {
+    insertOne: function(table, col, newBurger, callback) {
         var sqlInsertOne = "INSERT INTO ?? (??) VALUES (?)";
-            connection.query(sqlInsertOne,[table, col, nBurger], function(err, data){
+            connection.query(sqlInsertOne,[table, col, newBurger], function(err, data){
                                 if (err) throw err;
 
-                                console.log(nBurger + "added to table");
+                                console.log(newBurger + "added to table");
                                 callback(data);
                             });
     },
@@ -48,7 +34,8 @@ var orm = {
                     // res.status(200).end();
                 }
             });
-        };
+        }
+};
 // app.listen(port);
 
 

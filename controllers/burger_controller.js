@@ -7,15 +7,18 @@ var burger = require('../models/burger.js')
 //Create routes / Setup logic for when required.
 
 //Home page redirect.
-router.get("/", function(req, res) {
-    res.redirect("/index");
-});
-
-router.get("/index", function(req, res){
+router.get("/", function(req, res){
     burger.selectAll(function(data) {
-        var object = { burgers: data };
-        console.log(object);
-        res.render("index", object);
+        var eaten = [];
+        var notEaten = [];
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].devoured) {
+                eaten.push(data[i]);
+            } else {
+                notEaten.push(data[i]);
+            }
+        }
+        res.render("index", { newBurger: notEaten, devoured: eaten });
     });
 });
 
@@ -27,10 +30,10 @@ router.post("/burger/create", function(req, res) {
 });
 
 //Move / Devour burger
-router.put("/burger/eat/:id", function(req, res {
+router.put("/burger/eat/:id", function(req, res) {
     burger.updateOne(req.params.id, function(){
         res.redirect("/index");
     });
 });
 
-// module.exports = router;
+module.exports = router;
